@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Build the Docker image
+echo "Building the Docker image..."
+docker build -t fixed-width-parser .
+
+# Check if the build succeeded
+if [ $? -ne 0 ]; then
+    echo "Docker build failed. Exiting."
+    exit 1
+fi
+
+# Run the Docker container
+echo "Running the Docker container..."
+docker run --rm -v $(pwd):/app fixed-width-parser
+
+# Notify the user
+echo "Process completed! Check the output.csv file in the current directory."
